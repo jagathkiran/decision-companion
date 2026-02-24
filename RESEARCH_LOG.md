@@ -23,3 +23,20 @@ A: A Decision Companion System achieves one core thing: Helping humans make bett
 
 P: Why does it works?
 A: It works because of one fundamental principle: Decision-making fails when information is incomplete, disorganized, or emotionally influenced.
+
+P: What are the options that i have in designing the system? eg: how the system makes decisions, which type of system to build (cli, web app, api. etc.), What the user is supposed to enter, etc.
+
+P: Your task is to design a decision companion system that:
+
+    1. Help me make a wide variety of decisions
+    2. Has a weighted process for decision making
+    3. There should not be any hard coded values for decision making
+
+    Deliverables:
+
+    1. Architecture Diagram (UML)
+    2. Data flow diagram
+    3. Control flow diagram
+    4. Component diagrams
+
+    Make the diagram in mermaid if you can.
