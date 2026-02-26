@@ -1,0 +1,36 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+package "Interface Layer" {
+  [Interactive CLI] as CLI
+}
+
+package "Intelligence Layer" {
+  [Weighted Scoring Engine] as WSE
+  [Insight & Rationale Engine] as IRE
+}
+
+package "Data Layer" {
+  database "Audit Log (JSON)" as JSON
+  [Dynamic Schema Handler] as SCHEMA
+}
+
+() "IUserInterface" as I_UI
+() "IDecisionLogic" as I_DL
+() "IInsight" as I_INS
+() "IPersistence" as I_PER
+
+CLI --( I_UI
+I_UI -- WSE
+
+WSE --( I_INS
+I_INS -- IRE
+
+WSE --( I_DL
+I_DL -- SCHEMA
+
+SCHEMA --( I_PER
+I_PER -- JSON
+
+@enduml

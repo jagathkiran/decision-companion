@@ -1,0 +1,44 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+package "Interface Layer" {
+    class UserInterface <<Boundary>> {
+        +captureDecisionContext(): DecisionObject
+        +renderVisualRankings(rankings: List): void
+        +displayInsight(explanation: String): void
+    }
+}
+
+package "Intelligence Layer" {
+    class DecisionEngine <<Service>> {
+        +applyWeightedLogic(data: DecisionObject): Result
+        +performSensitivityAnalysis(): AnalysisReport
+    }
+
+    class InsightGenerator <<Logic>> {
+        +generateRationale(results: Result): String
+        +identifyBias(scores: List): String
+    }
+}
+
+package "Data Layer" {
+    class PersistenceLayer <<Repository>> {
+        +archiveDecision(record: DecisionObject): void
+        +fetchAuditTrail(): List<DecisionObject>
+    }
+
+    class DecisionObject <<Entity>> {
+        +metadata: Map
+        +evaluationGrid: Matrix
+        +weightProfile: Map
+    }
+}
+
+UserInterface ..> DecisionEngine : uses
+DecisionEngine --> DecisionObject : manages
+DecisionEngine --> InsightGenerator : delegates
+DecisionEngine --> PersistenceLayer : persists
+
+@enduml

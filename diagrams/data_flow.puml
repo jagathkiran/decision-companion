@@ -1,0 +1,33 @@
+@startuml
+!define GaneSarson
+skinparam monochrome true
+skinparam shadowing false
+
+skinparam rectangle {
+    BackgroundColor<<Entity>> white
+    BackgroundColor<<Process>> white
+    BackgroundColor<<Store>> white
+}
+
+' External Entities (Squares)
+rectangle "User" as user <<Entity>>
+
+' Processes (Rounded Rectangles)
+rectangle "1.0\nDefine Evaluation\nFramework" as P1 <<Process>>
+rectangle "2.0\nAssign Criteria\n& Weights" as P2 <<Process>>
+rectangle "3.0\nScore & Rank\nOptions" as P3 <<Process>>
+rectangle "4.0\nGenerate Insights\n& Rationale" as P4 <<Process>>
+
+' Data Stores (Open-ended Rectangles)
+rectangle "D1 Decision History" as DS1 <<Store>>
+
+' Data Flows (Labeled Arrows)
+user --> P1 : Context &\nMetadata
+P1 --> P2 : Framework\nSchema
+P2 --> P3 : Weight\nProfiles
+P1 --> P3 : Option\nMatrix
+P3 --> P4 : Ranked\nResults
+P4 --> user : Final Recommendation\n+ Why?
+P4 --> DS1 : Audit Record
+
+@enduml

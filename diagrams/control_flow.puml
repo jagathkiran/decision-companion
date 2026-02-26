@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+title Decision Companion Control Flow
+
+start
+
+:Define Decision Scope;
+:Build Evaluation Framework;
+
+repeat
+  :Assign Importance/Weights;
+  :Score Options;
+  :Generate Preliminary Results;
+  :Generate Rationale & Insights;
+  
+  backward:Refine Weights/Scores;
+repeat while (Review Results?) is (Refine)
+-> Confirm;
+
+:Save to Audit Trail;
+
+stop
+
+@enduml
