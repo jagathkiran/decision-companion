@@ -85,3 +85,7 @@ L: [II Year - DKR25 - Decision Support System.pdf](https://www.msuniv.ac.in/imag
 > 3. Design Diagram (Architecture/Flow)
 > 4. BUILD_PROCESS.md (Evolution of thought)
 > 5. RESEARCH_LOG.md (AI prompts and references)
+
+> **F: Add the system specifications and core assumptions to BUILD_PROCESS.md, specifically defining it as a CLI-based guided onboarding system that helps users make rational decisions.**
+>
+> **A:** Updated `BUILD_PROCESS.md` to reflect that the system helps users make rational decisions by assuming they know their options and weights clearly and providing a structure for evaluation.
