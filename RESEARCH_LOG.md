@@ -89,3 +89,11 @@ L: [II Year - DKR25 - Decision Support System.pdf](https://www.msuniv.ac.in/imag
 > **F: Add the system specifications and core assumptions to BUILD_PROCESS.md, specifically defining it as a CLI-based guided onboarding system that helps users make rational decisions.**
 >
 > **A:** Updated `BUILD_PROCESS.md` to reflect that the system helps users make rational decisions by assuming they know their options and weights clearly and providing a structure for evaluation.
+
+---
+
+## Core Requirement & Logic
+
+> **P: build a desion companion system in python with the following specifications: A CLI, weighted scoring, guided onboarding system that assumes the user knows their options and weights clearly and helps them make a rational decision among them.**
+>
+> **A: Understood. The system will be designed as a dynamic CLI tool that facilitates weighted decision-making through a guided onboarding process, prioritizing user-defined criteria and rational quantification.**
