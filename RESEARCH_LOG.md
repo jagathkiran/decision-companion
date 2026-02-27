@@ -97,3 +97,7 @@ L: [II Year - DKR25 - Decision Support System.pdf](https://www.msuniv.ac.in/imag
 > **P: build a desion companion system in python with the following specifications: A CLI, weighted scoring, guided onboarding system that assumes the user knows their options and weights clearly and helps them make a rational decision among them.**
 >
 > **A: Understood. The system will be designed as a dynamic CLI tool that facilitates weighted decision-making through a guided onboarding process, prioritizing user-defined criteria and rational quantification.**
+
+> **F: update readme.md and add the todo.md as whole into the gemini.md**
+>
+> **A:** Appended the contents of `TODO.md` to `GEMINI.md` to maintain context, and comprehensively updated `README.md` to address all assignment deliverables, including problem understanding, assumptions, design decisions, edge cases, and future improvements.
