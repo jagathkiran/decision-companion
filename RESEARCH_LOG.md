@@ -72,6 +72,10 @@ L: [II Year - DKR25 - Decision Support System.pdf](https://www.msuniv.ac.in/imag
 
 ## Documentation & Tooling
 
+> **P: add all the prompts along with a descriptive output into the RESEARCH_LOG.md**
+>
+> **A:** Established a mandatory logging protocol to track all significant project-related prompts, search queries, and AI responses to ensure transparency and traceability in the decision-making process.
+
 > **F: can you go through all the prompts and give me output in the notes folder for me(such as options.md)**
 >
 > **A:** Generated structured documentation in the `/notes` folder: `definition.md`, `options.md`, `architecture.md`, and `comparison.md`.
