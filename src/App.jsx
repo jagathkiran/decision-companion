@@ -1,13 +1,7 @@
-import { useState, useEffect } from "react";
-import { supabase } from "./supabaseClient";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
-	const [session, setSession] = useState(null);
-	const [email, setEmail] = useState("");
-	const [authLoading, setAuthLoading] = useState(false);
-	const [authMessage, setAuthMessage] = useState("");
-
 	const [step, setStep] = useState(1);
 	const [title, setTitle] = useState("");
 	const [category, setCategory] = useState("");
@@ -19,45 +13,6 @@ function App() {
 	const [scores, setScores] = useState({});
 	const [results, setResults] = useState(null);
 	const [loading, setLoading] = useState(false);
-
-	// Progressive Auth: Initialize session on load
-	useEffect(() => {
-		supabase.auth.getSession().then(({ data: { session } }) => {
-			setSession(session);
-			// If no session exists, create an anonymous one automatically
-			if (!session) {
-				signInAnonymously();
-			}
-		});
-
-		supabase.auth.onAuthStateChange((_event, session) => {
-			setSession(session);
-		});
-	}, []);
-
-	const signInAnonymously = async () => {
-		const { error } = await supabase.auth.signInAnonymously();
-		if (error) console.error("Anonymous auth failed:", error.message);
-	};
-
-	const handleEmailSignIn = async (e) => {
-		e.preventDefault();
-		setAuthLoading(true);
-		setAuthMessage("");
-		const { error } = await supabase.auth.signInWithOtp({ email });
-		if (error) {
-			setAuthMessage(error.message);
-		} else {
-			setAuthMessage("Check your email for the login link!");
-		}
-		setAuthLoading(false);
-	};
-
-	const handleSignOut = async () => {
-		await supabase.auth.signOut();
-		// After explicit sign out, spin up a new anonymous session for continued use
-		signInAnonymously();
-	};
 
 	// Handlers for Options
 	const handleOptionChange = (index, value) => {
@@ -91,45 +46,25 @@ function App() {
 		}));
 	};
 
-	// Submission & Database Save
+	// Submission
 	const evaluateDecision = async () => {
 		setLoading(true);
 		try {
 			const validOptions = options.filter((o) => o.trim() !== "");
 			const validCriteria = criteria.filter((c) => c.name.trim() !== "");
 
-			const requestBody = {
-				options: validOptions,
-				criteria: validCriteria,
-				scores: scores,
-			};
-
 			const response = await fetch("/api/evaluate", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(requestBody),
+				body: JSON.stringify({
+					options: validOptions,
+					criteria: validCriteria,
+					scores: scores,
+				}),
 			});
 
 			const data = await response.json();
 			setResults(data);
-
-			// Save to Supabase if session exists
-			if (session?.user) {
-				const { error: dbError } = await supabase
-					.from("decisions")
-					.insert([
-						{
-							user_id: session.user.id,
-							title: title || "Untitled Decision",
-							summary: `Recommended: ${data.winner}`,
-							raw_data: { input: requestBody, results: data },
-						},
-					]);
-
-				if (dbError)
-					console.error("Error saving to database:", dbError);
-			}
-
 			setStep(5);
 		} catch (error) {
 			console.error("Error evaluating decision:", error);
@@ -139,42 +74,8 @@ function App() {
 		}
 	};
 
-	const isAnonymous = session?.user?.is_anonymous;
-
 	return (
 		<div className="container">
-			<div className="auth-bar">
-				{session && !isAnonymous ? (
-					<span>
-						Welcome, {session.user.email}{" "}
-						<button className="text-btn" onClick={handleSignOut}>
-							Sign Out
-						</button>
-					</span>
-				) : (
-					<form onSubmit={handleEmailSignIn} className="auth-form">
-						<span>
-							{isAnonymous
-								? "Playing as Guest. Save your data: "
-								: "Login: "}
-						</span>
-						<input
-							type="email"
-							placeholder="Your email address"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							required
-						/>
-						<button type="submit" disabled={authLoading || !email}>
-							{authLoading ? "Sending..." : "Send Magic Link"}
-						</button>
-						{authMessage && (
-							<span className="auth-msg">{authMessage}</span>
-						)}
-					</form>
-				)}
-			</div>
-
 			<header className="header">
 				<h1>🧭 Decision Companion</h1>
 				<p>Weighted decisions. Clearer choices.</p>
@@ -436,31 +337,15 @@ function App() {
 							),
 						)}
 
-						{isAnonymous && (
-							<div className="promo-box">
-								<p>
-									💡 Your decision was saved temporarily.
-									Enter your email at the top to save it
-									permanently across devices!
-								</p>
-							</div>
-						)}
-
 						<div className="actions">
+							{/* Later we can hook up Supabase save here */}
 							<button
 								onClick={() => {
 									setStep(1);
 									setResults(null);
-									setTitle("");
-									setOptions(["", ""]);
-									setCriteria([
-										{ name: "", weight: 3 },
-										{ name: "", weight: 3 },
-									]);
-									setScores({});
 								}}
 							>
-								Make Another Decision
+								Start Over
 							</button>
 						</div>
 					</div>
@@ -471,4 +356,3 @@ function App() {
 }
 
 export default App;
-
