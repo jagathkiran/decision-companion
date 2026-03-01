@@ -149,3 +149,67 @@ L: [II Year - DKR25 - Decision Support System.pdf](https://www.msuniv.ac.in/imag
 > **F: where do i add the environment variables in vercel? and how do you define the build and output settings?**
 >
 > **A:** Provided detailed instructions for adding environment variables and configuring framework-specific (Vite/CRA) build settings in the Vercel dashboard, and updated `notes/setup_guide.md` with these details.
+
+> **F: why does your .env has VITE prefix, whereas the setup docs doesnt?**
+>
+> **A:** Explained the distinction between frontend (`VITE_` prefixed, exposed to browser) and backend environment variables, and updated `notes/setup_guide.md` to reflect the need for both.
+
+> **F: what should i select in "setup and develop" in vercel dev**
+>
+> **A:** Provided step-by-step answers for the `vercel dev` CLI setup prompts to properly initialize the local development environment.
+
+> **F: what if i dont want to add it to my project**
+>
+> **A:** Outlined the alternative of running the Vite frontend and Uvicorn backend manually on separate ports, noting the necessity of configuring CORS for them to communicate locally.
+
+> **F: will vercel dev push to the repo?**
+>
+> **A:** Assured that `vercel dev` only creates local cloud references and development servers without altering or pushing to the Git repository.
+
+> **F: I already have my project set up in vercel. i should add all the env (4) into vercel as well right? also, we didnt configure fastapi in vercel right? How do i test manually, without creating a new project**
+>
+> **A:** Confirmed all 4 environment variables are needed in Vercel. Clarified Vercel's "Zero-Config" deployment handles the `api/` folder automatically. Provided instructions on running two separate servers for manual testing.
+
+> **F: do we need to add the cors if you commit and push to the git repo that vercel is accessing the project from?**
+>
+> **A:** Clarified that CORS is not needed when deployed via Vercel or using `vercel dev`, as both frontend and backend are served from the same unified origin.
+
+> **P: add python related temporary files and files to ignore to @.gitignore**
+>
+> **A:** Updated the `.gitignore` file to include standard Python artifacts (`__pycache__`, `.venv`, etc.) and the `.vercel` directory to prevent tracking temporary files.
+
+> **P: migrate to webapp**
+>
+> **A:** Ported the `IntelligenceLayer` mathematical scoring logic from `decision_companion.py` into a new FastAPI backend (`api/index.py`). Rewrote the Vite React frontend (`src/App.jsx` and `src/App.css`) to create an interactive 5-step guided onboarding flow, styled with a modern vanilla CSS design. Successfully verified the React build to finalize the web application structure.
+
+> **F: is it finalized? can i push and except an output? should i worry about the lsp error for import fastapi could not be resolved and import pydantic could not be resolved?**
+>
+> **A:** Confirmed the project is finalized for pushing. Explained that local LSP errors occur because dependencies are missing locally, but Vercel manages its own environment successfully via `api/requirements.txt`. Provided optional instructions for setting up a local virtual environment.
+
+> **P: update @README.md and @BUILD_PROCESS.md to include the migration to webapp which aligns with the TODO**
+>
+> **A:** Updated `README.md` to reflect the new React/FastAPI/Vercel architecture and updated `BUILD_PROCESS.md` with a "Phase 2" section detailing the rationale and trade-offs of the web migration.
+
+> **F: what does the note in readme mean? do the user have to manually configure the cors to run the project and or will the two terminal still work? also we can now remove the @decision_companion.py right? why did you remove the compilation of diagrams from the readme?**
+>
+> **A:** Clarified local dev methods, restored the missing diagram compilation section, and permanently removed the obsolete `decision_companion.py` script.
+
+> **F: how do you configure cors?**
+>
+> **A:** Provided the exact code block to add FastAPI `CORSMiddleware` in `api/index.py` for manual dual-terminal local testing.
+
+> **F: Help me understand vercel cli. when i run vercel dev, will it create a project in my account where i have logged in to vercel cli or will it just run locally like you do with npm run dev?**
+>
+> **A:** Clarified that `vercel dev` does both: it creates a blank "shell" project in the cloud to manage variables, and then runs local servers on a unified port that mimics production routing.
+
+> **F: can you make vercel cli not create a project in your account by any chance?**
+>
+> **A:** Explained that Vercel CLI forces project creation. Proposed an offline alternative: configuring Vite's built-in `server.proxy` to route `/api` requests to the local Python backend on port 8000, avoiding CORS without needing Vercel CLI.
+
+> **F: will this work on vercel production?**
+>
+> **A:** Clarified that the Vite proxy is ignored in production, but the `vercel.json` file seamlessly takes over the routing when deployed to the cloud.
+
+> **F: so you can keep this and push to repo and the production and dev in will work fine?**
+>
+> **A:** Confirmed that keeping the Vite proxy locally and relying on `vercel.json` in production is the best practice. Added the proxy to `vite.config.js` and updated the `README.md` to show that the dual-terminal method no longer requires CORS.
