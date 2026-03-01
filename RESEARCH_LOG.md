@@ -105,3 +105,7 @@ L: [II Year - DKR25 - Decision Support System.pdf](https://www.msuniv.ac.in/imag
 > **F: update readme.md and add the todo.md as whole into the gemini.md**
 >
 > **A:** Appended the contents of `TODO.md` to `GEMINI.md` to maintain context, and comprehensively updated `README.md` to address all assignment deliverables, including problem understanding, assumptions, design decisions, edge cases, and future improvements.
+
+> **F: for the readme add an index for headings**
+>
+> **A:** Generated and inserted a Table of Contents (index) into the `README.md` to improve navigation across the project documentation.

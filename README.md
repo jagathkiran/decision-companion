@@ -1,5 +1,21 @@
 # Decision Companion System (DCS)
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Problem Statement & Understanding](#problem-statement--understanding)
+- [Assumptions Made](#assumptions-made)
+- [System Architecture & Design Decisions](#system-architecture--design-decisions)
+    - [Why a CLI?](#why-a-cli)
+    - [Structural Decisions](#structural-decisions)
+    - [Trade-offs](#trade-offs)
+- [Edge Cases Considered](#edge-cases-considered)
+- [How to Run the Project](#how-to-run-the-project)
+    - [Prerequisites](#prerequisites)
+    - [Execution](#execution)
+    - [Compiling Diagrams (Optional)](#compiling-diagrams-optional)
+- [Future Improvements](#future-improvements)
+
 ## Overview
 
 The Decision Companion System is a lightweight, human-centric CLI tool designed to help users evaluate multiple options using a dynamic, weighted scoring framework. Unlike complex, automated systems that attempt to make the decision for you, this companion assumes you know your options and the criteria that matter, and it provides a structured process to reach a rational conclusion.
