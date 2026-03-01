@@ -213,3 +213,15 @@ L: [II Year - DKR25 - Decision Support System.pdf](https://www.msuniv.ac.in/imag
 > **F: so you can keep this and push to repo and the production and dev in will work fine?**
 >
 > **A:** Confirmed that keeping the Vite proxy locally and relying on `vercel.json` in production is the best practice. Added the proxy to `vite.config.js` and updated the `README.md` to show that the dual-terminal method no longer requires CORS.
+
+> **F: where is the env variables used in this app?**
+>
+> **A:** Clarified that the environment variables were not yet actively utilized because we had prioritized the core UI/logic migration. Outlined the next steps for integrating them via a Supabase client.
+
+> **F: how will the login managed? will the login contain a username, password based login or just session state for each device user?**
+>
+> **A:** Outlined the trade-offs between device-based Anonymous Login (low friction, no persistence across devices) and Traditional Auth (high friction, permanent persistence). Recommended a hybrid "Progressive Profiling" approach.
+
+> **P: Use progressive auth. complete the migration to the supabase auth and db for storing the output, offer sign in button too**
+>
+> **A:** Implemented the Progressive Authentication flow. Installed `@supabase/supabase-js`, created `src/supabaseClient.js`, and updated `src/App.jsx` to automatically create anonymous sessions, save decisions to the PostgreSQL database, and provide a top-bar UI for users to optionally link an email to save their history permanently.

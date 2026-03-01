@@ -227,3 +227,58 @@ button:disabled {
 .breakdown-row strong {
 	color: var(--text-main);
 }
+
+/* Auth & Promo Styles */
+.auth-bar {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-bottom: 2rem;
+	font-size: 0.9rem;
+	color: var(--text-muted);
+}
+
+.auth-form {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.auth-form input {
+	padding: 0.4rem 0.75rem;
+	width: 200px;
+}
+
+.auth-form button {
+	padding: 0.4rem 0.75rem;
+	font-size: 0.9rem;
+}
+
+.auth-msg {
+	color: var(--success-color);
+	font-size: 0.85rem;
+}
+
+.text-btn {
+	background: none;
+	color: var(--primary-color);
+	padding: 0;
+	margin-left: 1rem;
+	text-decoration: underline;
+}
+
+.text-btn:hover {
+	background: none;
+	color: var(--primary-hover);
+}
+
+.promo-box {
+	background-color: #fef3c7;
+	border: 1px solid #f59e0b;
+	color: #92400e;
+	padding: 1rem;
+	border-radius: 8px;
+	margin-bottom: 1.5rem;
+	text-align: center;
+	font-size: 0.95rem;
+}
