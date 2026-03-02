@@ -3,7 +3,7 @@ skinparam classAttributeIconSize 0
 skinparam monochrome true
 skinparam shadowing false
 
-package "Interface Layer" {
+package "Interface Layer (React)" {
     class UserInterface <<Boundary>> {
         +captureDecisionContext(): DecisionObject
         +renderVisualRankings(rankings: List): void
@@ -11,34 +11,29 @@ package "Interface Layer" {
     }
 }
 
-package "Intelligence Layer" {
+package "Intelligence Layer (FastAPI)" {
     class DecisionEngine <<Service>> {
         +applyWeightedLogic(data: DecisionObject): Result
-        +performSensitivityAnalysis(): AnalysisReport
-    }
-
-    class InsightGenerator <<Logic>> {
-        +generateRationale(results: Result): String
-        +identifyBias(scores: List): String
     }
 }
 
-package "Data Layer" {
-    class PersistenceLayer <<Repository>> {
+package "Data Layer (Browser)" {
+    class localStorage <<Repository>> {
         +archiveDecision(record: DecisionObject): void
         +fetchAuditTrail(): List<DecisionObject>
     }
 
     class DecisionObject <<Entity>> {
-        +metadata: Map
-        +evaluationGrid: Matrix
-        +weightProfile: Map
+        +id: long
+        +date: string
+        +title: string
+        +category: string
+        +results: Map
     }
 }
 
-UserInterface ..> DecisionEngine : uses
-DecisionEngine --> DecisionObject : manages
-DecisionEngine --> InsightGenerator : delegates
-DecisionEngine --> PersistenceLayer : persists
+UserInterface ..> DecisionEngine : fetch (/api/evaluate)
+DecisionEngine --> DecisionObject : processes
+UserInterface --> localStorage : persists (History)
 
 @enduml

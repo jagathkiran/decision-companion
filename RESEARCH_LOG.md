@@ -246,4 +246,40 @@ L: [II Year - DKR25 - Decision Support System.pdf](https://www.msuniv.ac.in/imag
 
 > **G: Supabase not working**
 
-> \*_L: [India disrupts access to popular developer platform Supabase with blocking order](https://www.msn.com/en-us/money/other/india-disrupts-access-to-popular-developer-platform-supabase-with-blocking-order/ar-AA1Xf7xd)_
+> **L: [India disrupts access to popular developer platform Supabase with blocking order](https://www.msn.com/en-us/money/other/india-disrupts-access-to-popular-developer-platform-supabase-with-blocking-order/ar-AA1Xf7xd)**
+
+---
+
+## Pivot to Local Persistence
+
+> **P: as supabase is not working, what can we switch to? add this as a note and lets work with the local storage as we wouldnt have to worry about setting up a service with ddos guard and all. I have a question: where does the local storage store the data in? is that as cookies?**
+>
+> A: Switched from Supabase to localStorage for persistence to bypass regional network blocks. Documented the strategy in `notes/persistence_strategy.md`. Explained that localStorage is a browser-native storage API, distinct from cookies, providing larger capacity (~5MB) and remaining local to the device without being transmitted in HTTP headers.
+
+> **F: if we were to use sqllite, which hosting sevice should i use?**
+>
+> **A:** Recommended Fly.io (with Volumes), Turso (managed libSQL), or Railway for hosting SQLite, explaining that standard serverless platforms like Vercel have ephemeral filesystems that would delete the database on every restart.
+
+> **F: what about github pages?**
+>
+> **A:** Explained that GitHub Pages is for static files only and cannot run Python/FastAPI or write to an SQLite database. Proposed a "Full Frontend Port" as an alternative if GitHub Pages was a hard requirement.
+
+> **P: we can continue with the local file system**
+>
+> **A:** Proceeded with implementing `localStorage` persistence in the React frontend. Added a "📜 History" view to the UI, allowing users to save, view, and revisit past decisions directly in their browser.
+
+> **F: will this increase ram usage? is it completely stored in storage?**
+>
+> **A:** Clarified that `localStorage` is stored on the hard drive (not RAM) and is persistent. Explained that even 1,000 decisions would only consume ~500KB of text, which is negligible compared to the RAM usage of a standard browser tab.
+
+> **P: update the design according to this flow now.**
+>
+> **A:** Updated all design diagrams (Architecture, Component, Data Flow, Control Flow) and `notes/architecture.md` to reflect the React/FastAPI/localStorage architecture. Recompiled all PlantUML source files into PNG format.
+
+> **F: if we were to use sqllite, which hosting sevice should i use?**
+>
+> **A:** Recommended Fly.io (with Volumes), Turso (managed libSQL), or Railway for hosting SQLite, explaining that standard serverless platforms like Vercel have ephemeral filesystems that would delete the database on every restart.
+
+> **F: what about github pages?**
+>
+> **A:** Explained that GitHub Pages is for static files only and cannot run Python/FastAPI or write to an SQLite database. Proposed a "Full Frontend Port" as an alternative if GitHub Pages was a hard requirement.

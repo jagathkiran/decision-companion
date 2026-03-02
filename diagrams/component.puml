@@ -2,35 +2,32 @@
 skinparam monochrome true
 skinparam shadowing false
 
-package "Interface Layer" {
-  [Interactive CLI] as CLI
+package "Frontend (React/Vite)" {
+  [Wizard Interface] as UI
+  [History Manager] as HM
+  [State Orchestrator] as SO
 }
 
-package "Intelligence Layer" {
-  [Weighted Scoring Engine] as WSE
-  [Insight & Rationale Engine] as IRE
+package "Backend (FastAPI)" {
+  [Scoring Engine] as SE
+  [Insight Logic] as IL
 }
 
-package "Data Layer" {
-  database "Audit Log (JSON)" as JSON
-  [Dynamic Schema Handler] as SCHEMA
+package "Persistence (Browser)" {
+  database "localStorage (JSON)" as STORAGE
 }
 
-() "IUserInterface" as I_UI
-() "IDecisionLogic" as I_DL
-() "IInsight" as I_INS
-() "IPersistence" as I_PER
+' Interface points
+() "REST API" as API
+() "Browser Storage API" as STORAGE_API
 
-CLI --( I_UI
-I_UI -- WSE
+UI -- SO
+SO -- API
+API -- SE
+SE -- IL
 
-WSE --( I_INS
-I_INS -- IRE
-
-WSE --( I_DL
-I_DL -- SCHEMA
-
-SCHEMA --( I_PER
-I_PER -- JSON
+SO -- HM
+HM -- STORAGE_API
+STORAGE_API -- STORAGE
 
 @enduml

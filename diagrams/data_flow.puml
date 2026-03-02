@@ -9,25 +9,30 @@ skinparam rectangle {
     BackgroundColor<<Store>> white
 }
 
-' External Entities (Squares)
+' External Entities
 rectangle "User" as user <<Entity>>
 
-' Processes (Rounded Rectangles)
-rectangle "1.0\nDefine Evaluation\nFramework" as P1 <<Process>>
-rectangle "2.0\nAssign Criteria\n& Weights" as P2 <<Process>>
-rectangle "3.0\nScore & Rank\nOptions" as P3 <<Process>>
-rectangle "4.0\nGenerate Insights\n& Rationale" as P4 <<Process>>
+' Processes
+package "Frontend (React)" {
+    rectangle "1.0\nCapture Context\n& Framework" as P1 <<Process>>
+    rectangle "2.0\nAssign Weights\n& Scores" as P2 <<Process>>
+    rectangle "4.0\nRender Results\n& History" as P4 <<Process>>
+}
 
-' Data Stores (Open-ended Rectangles)
-rectangle "D1 Decision History" as DS1 <<Store>>
+package "Backend (FastAPI)" {
+    rectangle "3.0\nCalculate Rank\n& Insights" as P3 <<Process>>
+}
 
-' Data Flows (Labeled Arrows)
-user --> P1 : Context &\nMetadata
-P1 --> P2 : Framework\nSchema
-P2 --> P3 : Weight\nProfiles
-P1 --> P3 : Option\nMatrix
-P3 --> P4 : Ranked\nResults
-P4 --> user : Final Recommendation\n+ Why?
-P4 --> DS1 : Audit Record
+' Data Stores
+rectangle "D1 localStorage" as DS1 <<Store>>
+
+' Data Flows
+user --> P1 : Input
+P1 --> P2 : State
+P2 --> P3 : JSON Payload (POST /api/evaluate)
+P3 --> P4 : Response (Rankings + Insight)
+P4 --> user : Visualize Recommendation
+P4 --> DS1 : Archive (JSON)
+DS1 --> P4 : Retrieve History
 
 @enduml
