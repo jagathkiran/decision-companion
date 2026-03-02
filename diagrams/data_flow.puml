@@ -17,6 +17,7 @@ package "Frontend (React)" {
     rectangle "1.0\nCapture Context\n& Framework" as P1 <<Process>>
     rectangle "2.0\nAssign Weights\n& Scores" as P2 <<Process>>
     rectangle "4.0\nRender Results\n& History" as P4 <<Process>>
+    rectangle "5.0\nGenerate & Download\nReport (.txt)" as P5 <<Process>>
 }
 
 package "Backend (FastAPI)" {
@@ -32,6 +33,8 @@ P1 --> P2 : State
 P2 --> P3 : JSON Payload (POST /api/evaluate)
 P3 --> P4 : Response (Rankings + Insight)
 P4 --> user : Visualize Recommendation
+P4 --> P5 : Formatted Record
+P5 --> user : Text Report
 P4 --> DS1 : Archive (JSON)
 DS1 --> P4 : Retrieve History
 

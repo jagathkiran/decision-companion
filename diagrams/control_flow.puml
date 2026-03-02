@@ -18,6 +18,7 @@ repeat
   :Visualize Results;
   
   :Save to localStorage (History);
+  :Download Decision Report (Optional);
 
   if (Refine inputs?) then (Yes)
     :Return to Step 3/4;

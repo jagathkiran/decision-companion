@@ -272,3 +272,21 @@ button:disabled {
 	font-size: 0.85rem;
 	margin-top: 0.75rem;
 }
+
+.results-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 1rem;
+	gap: 1rem;
+}
+
+.results-header h2 {
+	margin-bottom: 0;
+	flex: 1;
+}
+
+.history-actions {
+	display: flex;
+	gap: 0.5rem;
+}

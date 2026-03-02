@@ -7,6 +7,7 @@ The top layer provides an interactive "Wizard" style UI that guides users throug
 
 - **Component Wizard**: Breaks down input into five logical steps (Context, Options, Criteria, Weighting, Scoring).
 - **History Manager**: Interfaces directly with the browser's `localStorage` to persist past decisions.
+- **Export Logic**: Generates formatted `.txt` decision reports from state or history for local download.
 - **State Management**: Orchestrates complex UI states (e.g., dynamic criteria lists) before submitting them for evaluation.
 
 ## 2. Intelligence Layer (FastAPI)

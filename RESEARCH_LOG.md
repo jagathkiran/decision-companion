@@ -295,3 +295,7 @@ L: [II Year - DKR25 - Decision Support System.pdf](https://www.msuniv.ac.in/imag
 > **F: the build process is to include why we moved from a technology to another. include that, not remove the old choices completely**
 >
 > **A:** Updated `BUILD_PROCESS.md` to explicitly document the technology evolution: from local CLI JSON -> Supabase Cloud -> `localStorage`. Emphasized that the final pivot was driven by regional network restrictions to ensure 100% uptime and privacy.
+
+> **P: add feature to download any decisions made in the history, and the option to download the decision at the end of the pipeline (where the decision is made). update the documentation (diagram and md files) and implement it**
+>
+> **A:** Implemented a local `.txt` report generator. Added download buttons to both the Results view and the History manager. Updated all architectural diagrams and project notes to reflect the new export capabilities.

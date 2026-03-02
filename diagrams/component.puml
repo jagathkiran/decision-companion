@@ -5,6 +5,7 @@ skinparam shadowing false
 package "Frontend (React/Vite)" {
   [Wizard Interface] as UI
   [History Manager] as HM
+  [Report Generator] as RG
   [State Orchestrator] as SO
 }
 

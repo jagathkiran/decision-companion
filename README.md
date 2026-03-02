@@ -47,6 +47,7 @@ The system was initially built as a CLI but has been migrated to a modern **Full
 
 - **Guided Onboarding Flow**: The application walks the user logically through the setup: _Define the Decision -> Establish Criteria -> Weight Criteria -> Score Options -> View Results_.
 - **Weighted Scoring Engine**: A mathematical approach where each option is scored (1-10) against each criterion, then multiplied by the criterion's weight (1-5).
+- **Decision Report Export**: Users can download a formatted `.txt` report of their results at the end of the pipeline or from their history, ensuring their rational process can be shared or archived.
 - **Audit Trail (History)**: Users can revisit past decisions at any time via the "📜 History" view, allowing for long-term accountability and review of previous rationales.
 
 ### Trade-offs
@@ -103,5 +104,5 @@ Navigate to the `diagrams/` directory and run `make` (requires `plantuml`).
 If given more time, I would consider adding:
 
 1. **Insight Generation**: Basic AI integration to provide qualitative feedback on the user's scoring.
-2. **Export to PDF/JSON**: Allow users to download their decision reports for sharing or backup.
+2. **Export to PDF/JSON**: Allow users to download their decision reports in more versatile formats (PDF/JSON).
 3. **Advanced Matrix Models**: Options for AHP (Analytic Hierarchy Process) for complex pairwise comparisons.

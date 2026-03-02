@@ -8,6 +8,7 @@ package "Interface Layer (React)" {
         +captureDecisionContext(): DecisionObject
         +renderVisualRankings(rankings: List): void
         +displayInsight(explanation: String): void
+        +generateReport(decision: DecisionObject): void
     }
 }
 

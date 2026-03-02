@@ -43,5 +43,10 @@ Instead of forcing a cloud dependency that might fail for users in restricted ne
 2. **Privacy**: Decision data stays exclusively on the user's machine, fulfilling the "human-centric" and "private" nature of the companion.
 3. **Reduced Friction**: No account creation or login required for basic persistence, lowering the barrier to entry while still providing an "audit trail."
 
-### Conclusion: Accountability & UI
-By persisting results in the browser and building a dedicated **"📜 History"** view, we maintained the core goal of a "traceable audit trail" while delivering a more robust and private user experience than the original cloud-based plan.
+### Phase 4: Capability Expansion (Export & Reporting)
+To enhance the system's utility as a "companion," a local **Report Generator** was implemented.
+- **Goal**: Allow users to share or archive their rational process.
+- **Implementation**: A pure-frontend logic that parses the decision JSON and generates a formatted `.txt` report for instant download.
+
+### Conclusion: Accountability & UX
+By persisting results in the browser and building a dedicated **"📜 History"** and **Export** system, we maintained the core goal of a "traceable audit trail" while delivering a robust, offline-ready tool that respects user privacy and circumvents external network constraints.
