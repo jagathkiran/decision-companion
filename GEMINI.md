@@ -61,16 +61,21 @@ make
 - **Documentation**: All significant prompts and research findings must be logged in `RESEARCH_LOG.md` following the established Legend (G, L, P, F, A).
 - **Architecture First**: Significant changes to the decision logic should be reflected in the PlantUML diagrams and documentation within the `notes/` directory.
 
-## Current Session Status (2026-02-25)
+## Current Session Status (2026-03-01)
 - **Accomplishments**:
-    - Discovered core assignment in `TODO.md` and appended to context.
-    - Refined architecture in `notes/architecture.md`.
-    - Created PlantUML diagrams and automated build with `Makefile`.
-    - Established strict logging conventions and chronological ordering in `RESEARCH_LOG.md`.
-    - Drafted `README.md` comprehensively covering all assignment deliverables.
-    - Created and refined `BUILD_PROCESS.md` detailing the evolution of thought.
-- **Next Steps**:
-    1.  **Refine Implementation**: Update `decision_companion.py` to meet "Explainability" requirements.
+    - **Web Migration Complete**: Successfully transitioned the project from a local Python CLI to a Full-Stack Web Application.
+    - **Backend Refactored**: Ported the `IntelligenceLayer` mathematical scoring engine from `decision_companion.py` into a type-safe FastAPI service (`api/index.py`).
+    - **Frontend Built**: Rewrote Vite starter files into a modern, 5-step interactive React application (`src/App.jsx` and components) styled with vanilla CSS.
+    - **Deployment Configured**: Set up `vercel.json` and Vite proxy (`vite.config.js`) for seamless local development and zero-config deployment on Vercel, bypassing all CORS issues.
+    - **Progressive Auth Attempted**: Implemented Supabase Client and a Progressive Authentication flow (Anonymous + Email/Password upgrade path).
+    - **Documentation Updated**: Updated `README.md`, `BUILD_PROCESS.md`, and rigorously logged all architectural decisions and troubleshooting steps in `RESEARCH_LOG.md`.
+- **Runtime Changes**:
+    - Deleted obsolete `decision_companion.py`.
+    - Added `@supabase/supabase-js` to frontend and `supabase` to backend `requirements.txt`.
+    - Updated `.gitignore` to prevent tracking of `.vercel` and Python artifact folders.
+- **Next Steps / Blockers**:
+    1.  **Network Resolution**: The Supabase Auth implementation is currently blocked locally due to ISP/Network routing issues (`ERR_CONNECTION_TIMED_OUT` to `.supabase.co` IPs). The code is architecturally sound but will fail to fetch on the current local network.
+    2.  **Evaluate Persistence Path**: Decide whether to leave the Supabase integration as-is for the evaluator, or revert to a stateless frontend if local testing is strictly required.
 
 ---
 
