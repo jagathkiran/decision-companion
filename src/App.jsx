@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
+// Import Components
+import HistoryView from "./components/HistoryView";
+import StepDecision from "./components/StepDecision";
+import StepOptions from "./components/StepOptions";
+import StepCriteria from "./components/StepCriteria";
+import StepScoring from "./components/StepScoring";
+import StepResults from "./components/StepResults";
+
 function App() {
 	const [step, setStep] = useState(1);
 	const [title, setTitle] = useState("");
@@ -139,7 +147,7 @@ function App() {
 			<header className="header">
 				<h1>🧭 Decision Companion</h1>
 				<p>Weighted decisions. Clearer choices.</p>
-				<button 
+				<button
 					className="history-toggle"
 					onClick={() => setViewingHistory(!viewingHistory)}
 				>
@@ -149,333 +157,70 @@ function App() {
 
 			<main className="card">
 				{viewingHistory ? (
-					<div className="step-content history-view">
-						<h2>📜 Decision History</h2>
-						{history.length === 0 ? (
-							<p className="subtitle">No saved decisions yet. Start your first one!</p>
-						) : (
-							<div className="history-list">
-								{history.map((item) => (
-									<div key={item.id} className="history-item">
-										<div className="history-header">
-											<strong>{item.title}</strong>
-											<span>{item.date}</span>
-										</div>
-										<p>Result: <strong>{item.winner}</strong></p>
-										<div className="history-actions">
-											<button 
-												className="small-btn"
-												onClick={() => {
-													setTitle(item.title);
-													setCategory(item.category);
-													setResults(item);
-													setViewingHistory(false);
-													setStep(5);
-												}}
-											>
-												View Details
-											</button>
-											<button 
-												className="small-btn secondary-btn"
-												onClick={() => downloadDecision(item)}
-											>
-												📥 Download
-											</button>
-										</div>
-									</div>
-								))}
-							</div>
-						)}
-						<div className="actions">
-							<button 
-								className="secondary-btn" 
-								onClick={() => setViewingHistory(false)}
-							>
-								Close History
-							</button>
-						</div>
-					</div>
+					<HistoryView
+						history={history}
+						setTitle={setTitle}
+						setCategory={setCategory}
+						setResults={setResults}
+						setViewingHistory={setViewingHistory}
+						setStep={setStep}
+						downloadDecision={downloadDecision}
+					/>
 				) : (
 					<>
 						{step === 1 && (
-							<div className="step-content">
-								<h2>Step 1: The Decision</h2>
-								<div className="form-group">
-									<label>Describe your decision in one line:</label>
-									<input
-										type="text"
-										placeholder="e.g., Which laptop should I buy?"
-										value={title}
-										onChange={(e) => setTitle(e.target.value)}
-									/>
-								</div>
-								<div className="form-group">
-									<label>Decision category:</label>
-									<input
-										type="text"
-										placeholder="e.g., Tech, Career, Personal..."
-										value={category}
-										onChange={(e) => setCategory(e.target.value)}
-									/>
-								</div>
-								<button
-									onClick={() => setStep(2)}
-									disabled={!title.trim()}
-								>
-									Next: Add Options
-								</button>
-							</div>
+							<StepDecision
+								title={title}
+								setTitle={setTitle}
+								category={category}
+								setCategory={setCategory}
+								setStep={setStep}
+							/>
 						)}
 
 						{step === 2 && (
-							<div className="step-content">
-								<h2>Step 2: Enter Options</h2>
-								<p className="subtitle">
-									What are you deciding between?
-								</p>
-								{options.map((opt, i) => (
-									<div key={i} className="form-row">
-										<input
-											type="text"
-											placeholder={`Option ${i + 1}`}
-											value={opt}
-											onChange={(e) =>
-												handleOptionChange(i, e.target.value)
-											}
-										/>
-										{options.length > 2 && (
-											<button
-												className="icon-btn"
-												onClick={() => removeOption(i)}
-											>
-												❌
-											</button>
-										)}
-									</div>
-								))}
-								<button className="secondary-btn" onClick={addOption}>
-									+ Add Another Option
-								</button>
-								<div className="actions">
-									<button
-										className="secondary-btn"
-										onClick={() => setStep(1)}
-									>
-										Back
-									</button>
-									<button
-										onClick={() => setStep(3)}
-										disabled={
-											options.filter((o) => o.trim() !== "")
-												.length < 2
-										}
-									>
-										Next: Add Criteria
-									</button>
-								</div>
-							</div>
+							<StepOptions
+								options={options}
+								handleOptionChange={handleOptionChange}
+								addOption={addOption}
+								removeOption={removeOption}
+								setStep={setStep}
+							/>
 						)}
 
 						{step === 3 && (
-							<div className="step-content">
-								<h2>Step 3: Define & Weight Criteria</h2>
-								<p className="subtitle">
-									What factors matter to you? (Weight 1-5)
-								</p>
-								{criteria.map((crit, i) => (
-									<div key={i} className="form-row criteria-row">
-										<input
-											type="text"
-											placeholder={`Criterion ${i + 1} (e.g., Price)`}
-											value={crit.name}
-											onChange={(e) =>
-												handleCriterionChange(
-													i,
-													"name",
-													e.target.value,
-												)
-											}
-											style={{ flex: 1 }}
-										/>
-										<input
-											type="number"
-											min="1"
-											max="5"
-											title="Weight (1-5)"
-											value={crit.weight}
-											onChange={(e) =>
-												handleCriterionChange(
-													i,
-													"weight",
-													parseInt(e.target.value) || 1,
-												)
-											}
-											style={{ width: "80px" }}
-										/>
-										{criteria.length > 2 && (
-											<button
-												className="icon-btn"
-												onClick={() => removeCriterion(i)}
-											>
-												❌
-											</button>
-										)}
-									</div>
-								))}
-								<button
-									className="secondary-btn"
-									onClick={addCriterion}
-								>
-									+ Add Another Criterion
-								</button>
-								<div className="actions">
-									<button
-										className="secondary-btn"
-										onClick={() => setStep(2)}
-									>
-										Back
-									</button>
-									<button
-										onClick={() => setStep(4)}
-										disabled={
-											criteria.filter((c) => c.name.trim() !== "")
-												.length < 2
-										}
-									>
-										Next: Score Options
-									</button>
-								</div>
-							</div>
+							<StepCriteria
+								criteria={criteria}
+								handleCriterionChange={handleCriterionChange}
+								addCriterion={addCriterion}
+								removeCriterion={removeCriterion}
+								setStep={setStep}
+							/>
 						)}
 
 						{step === 4 && (
-							<div className="step-content">
-								<h2>Step 4: Score Everything</h2>
-								<p className="subtitle">
-									Score each option against your criteria (1-10)
-								</p>
-
-								{options
-									.filter((o) => o.trim() !== "")
-									.map((opt) => (
-										<div key={opt} className="scoring-group">
-											<h3>Scoring: {opt}</h3>
-											{criteria
-												.filter((c) => c.name.trim() !== "")
-												.map((crit) => (
-													<div
-														key={crit.name}
-														className="form-row score-row"
-													>
-														<label>
-															{crit.name}{" "}
-															<span>
-																(Weight: {crit.weight})
-															</span>
-														</label>
-														<input
-															type="number"
-															min="1"
-															max="10"
-															placeholder="1-10"
-															value={
-																scores[opt]?.[
-																	crit.name
-																] || ""
-															}
-															onChange={(e) =>
-																handleScoreChange(
-																	opt,
-																	crit.name,
-																	e.target.value,
-																)
-															}
-														/>
-													</div>
-												))}
-										</div>
-									))}
-
-								<div className="actions">
-									<button
-										className="secondary-btn"
-										onClick={() => setStep(3)}
-									>
-										Back
-									</button>
-									<button
-										onClick={evaluateDecision}
-										disabled={loading}
-									>
-										{loading
-											? "Calculating..."
-											: "Calculate Results!"}
-									</button>
-								</div>
-							</div>
+							<StepScoring
+								options={options}
+								criteria={criteria}
+								scores={scores}
+								handleScoreChange={handleScoreChange}
+								evaluateDecision={evaluateDecision}
+								loading={loading}
+								setStep={setStep}
+							/>
 						)}
 
 						{step === 5 && results && (
-							<div className="step-content results-view">
-								<div className="results-header">
-									<h2>📊 Results: {title}</h2>
-									<button 
-										className="small-btn"
-										onClick={() => downloadDecision({
-											title,
-											category,
-											...results
-										})}
-									>
-										📥 Download Report
-									</button>
-								</div>
-								
-								<p className="insight">{results.insight}</p>
-								<div className="winner-banner">
-									✅ Recommended Choice:{" "}
-									<strong>{results.winner}</strong>
-								</div>
-
-								{Object.entries(results.ranked_results).map(
-									([option, data], i) => (
-										<div key={option} className="result-card">
-											<h3>
-												#{i + 1} {option}{" "}
-												<span>
-													{data.final.toFixed(2)} / 10
-												</span>
-											</h3>
-											<div className="breakdown">
-												{data.breakdown.map((b) => (
-													<div
-														key={b.criterion}
-														className="breakdown-row"
-													>
-														<span>{b.criterion}</span>
-														<span>Score: {b.score}</span>
-														<span>Weight: {b.weight}</span>
-														<strong>
-															Total: {b.weighted_score}
-														</strong>
-													</div>
-												))}
-											</div>
-										</div>
-									),
-								)}
-
-								<div className="actions">
-									<button
-										onClick={() => {
-											setStep(1);
-											setResults(null);
-										}}
-									>
-										Start Over
-									</button>
-								</div>
-							</div>
+							<StepResults
+								title={title}
+								category={category}
+								results={results}
+								downloadDecision={downloadDecision}
+								setStep={setStep}
+								setResults={setResults}
+								setTitle={setTitle}
+								setCategory={setCategory}
+							/>
 						)}
 					</>
 				)}

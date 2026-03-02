@@ -299,3 +299,7 @@ L: [II Year - DKR25 - Decision Support System.pdf](https://www.msuniv.ac.in/imag
 > **P: add feature to download any decisions made in the history, and the option to download the decision at the end of the pipeline (where the decision is made). update the documentation (diagram and md files) and implement it**
 >
 > **A:** Implemented a local `.txt` report generator. Added download buttons to both the Results view and the History manager. Updated all architectural diagrams and project notes to reflect the new export capabilities.
+
+> **P: refactor the app into components**
+>
+> **A:** Refactored the monolithic `src/App.jsx` into a modular architecture. Created a `src/components/` directory containing `HistoryView.jsx`, `StepDecision.jsx`, `StepOptions.jsx`, `StepCriteria.jsx`, `StepScoring.jsx`, and `StepResults.jsx`. App.jsx now functions as a clean state orchestrator, significantly improving code maintainability.
