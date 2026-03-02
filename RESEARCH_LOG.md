@@ -283,3 +283,15 @@ L: [II Year - DKR25 - Decision Support System.pdf](https://www.msuniv.ac.in/imag
 > **F: what about github pages?**
 >
 > **A:** Explained that GitHub Pages is for static files only and cannot run Python/FastAPI or write to an SQLite database. Proposed a "Full Frontend Port" as an alternative if GitHub Pages was a hard requirement.
+
+> **P: we can continue with the local file system**
+>
+> **A:** Proceeded with implementing `localStorage` persistence in the React frontend. Added a "📜 History" view to the UI, allowing users to save, view, and revisit past decisions directly in their browser.
+
+> **P: update readme.md and build_process.md / add the prompts**
+>
+> **A:** Synchronized all project documentation (`README.md`, `BUILD_PROCESS.md`, and `RESEARCH_LOG.md`) to reflect the current local-first architecture and the rationale behind the architectural shifts.
+
+> **F: the build process is to include why we moved from a technology to another. include that, not remove the old choices completely**
+>
+> **A:** Updated `BUILD_PROCESS.md` to explicitly document the technology evolution: from local CLI JSON -> Supabase Cloud -> `localStorage`. Emphasized that the final pivot was driven by regional network restrictions to ensure 100% uptime and privacy.
