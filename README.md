@@ -14,6 +14,8 @@
   - [Prerequisites](#prerequisites)
   - [Local Development](#local-development)
   - [Deployment](#deployment)
+- [Project Deliverables & Documentation](#project-deliverables--documentation)
+- [Visual Evidence & Artifacts](#visual-evidence--artifacts)
 - [Future Improvements](#future-improvements)
 
 ## Overview
@@ -98,6 +100,38 @@ The project is configured for "Zero-Config" deployment on Vercel. Simply push th
 ### Compiling Diagrams (Optional)
 
 Navigate to the `diagrams/` directory and run `make` (requires `plantuml`).
+
+## Project Deliverables & Documentation
+
+This repository contains all required materials for the assignment, organized as follows:
+
+### Primary Deliverables
+- **[BUILD_PROCESS.md](./BUILD_PROCESS.md)**: A detailed narrative of the project's evolution, from CLI to Full-Stack Web App, including refactoring decisions and challenges.
+- **[RESEARCH_LOG.md](./RESEARCH_LOG.md)**: A comprehensive log of all AI prompts, search queries, and references used throughout the development lifecycle.
+- **[Diagrams](./diagrams/)**: Architecture, Data Flow, Component, and Control Flow diagrams (available as `.puml` source and `.png` exports).
+
+### Deep-Dive Documentation
+Detailed architectural notes and design options are consolidated in the **[`notes/`](./notes/)** directory:
+- **[Architecture Deep-Dive](./notes/architecture.md)**: Technical details on the layered system design.
+- **[Migration Plan](./notes/migration_plan.md)**: Logic behind the CLI-to-Web transition.
+- **[Persistence Strategy](./notes/persistence_strategy.md)**: Why `localStorage` was chosen over cloud databases.
+
+## Visual Evidence & Artifacts
+
+The system's execution and outputs are archived in the **[`outputs/`](./outputs/)** directory.
+
+### Screenshots
+Below are representative steps of the Decision Companion process:
+
+**Step 1: Setup & Criteria Definition**  
+![Setup Screen](./outputs/1.png)
+
+**Step 5: Final Results & Analysis**  
+![Results Screen](./outputs/7.png)
+
+### Sample Output
+The system generates a human-readable summary of every decision. A sample report can be found here:
+- **[Sample Decision Report](./outputs/Which_laptop_to_buy__Report.txt)**
 
 ## Future Improvements
 
